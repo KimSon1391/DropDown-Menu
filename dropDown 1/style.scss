@@ -1,0 +1,104 @@
+$primary-color: #de4a3e;
+$secondary-color: #c64236;
+@mixin size($width, $height: $width) {
+    width: $width;
+    height: $height;
+}
+
+html {
+    font-size: 62.5%;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-size: 1.6rem;
+    font-weight: normal;
+    font-family: "Poppins", sans-serif;
+    text-transform: uppercase;
+    background-color: #2d3e50;
+}
+
+ul li {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+.dropdown {
+    position: relative;
+    width: 47.7rem;
+    margin: 10rem auto;
+    &__select,
+    &__items {
+        padding: 3rem;
+        background-color: $primary-color;
+        color: white;
+        font-weight: bold;
+        font-size: 2rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        cursor: pointer;
+    }
+    &__select {
+        border-radius: 10px;
+    }
+    &__items {
+        transition: all 0.2s linear;
+        &:first-child {
+            border-radius: 10px 10px 0 0;
+            &::before {
+                content: "";
+                position: absolute;
+                top: 0;
+                left: 3rem;
+                border-left: 15px solid transparent;
+                border-right: 15px solid transparent;
+                border-bottom: 15px solid $primary-color;
+                transform: translateY(-100%);
+                transition: border-bottom-color 0.2s linear;
+            }
+            &:hover::before {
+                border-bottom-color: $secondary-color;
+            }
+        }
+        &:last-child {
+            border-radius: 0 0 10px 10px;
+        }
+        &:hover {
+            background-color: $secondary-color;
+        }
+    }
+    &__list {
+        position: absolute;
+        margin-top: 2.5rem;
+        top: 100%;
+        left: 0;
+        right: 0;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.2s linear;
+        &::after {
+            content: "";
+            position: absolute;
+            @include size(100%, 2.5rem);
+            top: 0;
+            left: 0;
+            transform: translateY(-100%);
+            background-color: transparent;
+        }
+    }
+    &:hover {
+        .dropdown__list {
+            opacity: 1;
+            visibility: visible;
+        }
+    }
+}
